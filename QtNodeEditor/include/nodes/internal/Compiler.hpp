@@ -1,7 +1,7 @@
 #pragma once
 
-#if                                                               \
-  defined (__MINGW32__)                                        || \
+#if \
+  defined (__MINGW32__) || \
   defined (__MINGW64__)
 #  define NODE_EDITOR_COMPILER "MinGW"
 #  define NODE_EDITOR_COMPILER_MINGW
@@ -28,13 +28,13 @@
   defined (__CODEGEARC__)
 #  define NODE_EDITOR_COMPILER "CodeGear C++ Builder"
 #  define NODE_EDITOR_COMPILER_CODEGEAR
-#elif                                                             \
-  defined (__INTEL_COMPILER)                                   || \
+#elif \
+  defined (__INTEL_COMPILER) || \
   defined (__ICL)
 #  define NODE_EDITOR_COMPILER "Intel C++"
 #  define NODE_EDITOR_COMPILER_INTEL
-#elif                                                             \
-  defined (__xlC__)                                            || \
+#elif \
+  defined (__xlC__) || \
   defined (__IBMCPP__)
 #  define NODE_EDITOR_COMPILER "IBM XL C++"
 #  define NODE_EDITOR_COMPILER_IBM

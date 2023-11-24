@@ -12,10 +12,9 @@ struct hash<QUuid>
 {
   inline
   std::size_t
-  operator()(QUuid const& uid) const
+  operator()(QUuid const & uid) const
   {
     return qHash(uid);
   }
 };
 }
-

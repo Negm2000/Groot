@@ -8,72 +8,71 @@
 #include "XML_utilities.hpp"
 
 namespace Ui {
-class SidepanelEditor;
+  class SidepanelEditor;
 }
 
-class SidepanelEditor : public QFrame
+class SidepanelEditor: public QFrame
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit SidepanelEditor(QtNodes::DataModelRegistry* registry,
-                             NodeModels& tree_nodes_model,
-                             QWidget *parent = nullptr);
-    ~SidepanelEditor();
+  explicit SidepanelEditor(
+    QtNodes::DataModelRegistry * registry,
+    NodeModels & tree_nodes_model,
+    QWidget * parent = nullptr);
+  ~SidepanelEditor();
 
-    void updateTreeView();
+  void updateTreeView();
 
-    void clear();
+  void clear();
 
 public slots:
-    void onRemoveModel(QString selected_name);
+  void onRemoveModel(QString selected_name);
 
-    void onReplaceModel(const QString &old_name, const NodeModel &new_model);
-
+  void onReplaceModel(const QString & old_name, const NodeModel & new_model);
 
 private slots:
+  void on_paletteTreeWidget_itemSelectionChanged();
 
-    void on_paletteTreeWidget_itemSelectionChanged();
+  void on_lineEditFilter_textChanged(const QString & arg1);
 
-    void on_lineEditFilter_textChanged(const QString &arg1);
+  void on_buttonAddNode_clicked();
 
-    void on_buttonAddNode_clicked();
+  void onContextMenu(const QPoint & point);
 
-    void onContextMenu(const QPoint &point);
+  void on_buttonUpload_clicked();
 
-    void on_buttonUpload_clicked();
+  void on_buttonDownload_clicked();
 
-    void on_buttonDownload_clicked();
+  void on_buttonLock_toggled(bool checked);
 
-    void on_buttonLock_toggled(bool checked);
-
-    void onDoubleClick(QTreeWidgetItem *item, int column);
+  void onDoubleClick(QTreeWidgetItem * item, int column);
 
 signals:
 
-    void addNewModel(const NodeModel &new_model);
+  void addNewModel(const NodeModel & new_model);
 
-    void modelRemoveRequested(QString ID);
+  void modelRemoveRequested(QString ID);
 
-    void nodeModelEdited(QString prev_ID, QString new_ID);
+  void nodeModelEdited(QString prev_ID, QString new_ID);
 
-    void addSubtree(QString ID);
+  void addSubtree(QString ID);
 
-    void renameSubtree(QString prev_ID, QString new_ID);
+  void renameSubtree(QString prev_ID, QString new_ID);
 
-    void destroySubtree(QString ID);
+  void destroySubtree(QString ID);
 
-    void setTabScope(const QString& subtreeName);
+  void setTabScope(const QString & subtreeName);
 
 private:
-    Ui::SidepanelEditor *ui;
-    NodeModels &_tree_nodes_model;
-    QtNodes::DataModelRegistry* _model_registry;
-    std::map<QString, QTreeWidgetItem*> _tree_view_category_items;
+  Ui::SidepanelEditor * ui;
+  NodeModels & _tree_nodes_model;
+  QtNodes::DataModelRegistry * _model_registry;
+  std::map < QString, QTreeWidgetItem * > _tree_view_category_items;
 
-    NodeModels importFromXML(QFile *file);
+  NodeModels importFromXML(QFile * file);
 
-    NodeModels importFromSkills(const QString& filename);
+  NodeModels importFromSkills(const QString & filename);
 
 };
 

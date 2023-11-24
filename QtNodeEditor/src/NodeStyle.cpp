@@ -14,10 +14,9 @@
 
 using QtNodes::NodeStyle;
 
-inline void initResources() { Q_INIT_RESOURCE(resources); }
+inline void initResources() {Q_INIT_RESOURCE(resources);}
 
-NodeStyle::
-NodeStyle()
+NodeStyle::NodeStyle()
 {
   // Explicit resources inialization for preventing the static initialization
   // order fiasco: https://isocpp.org/wiki/faq/ctors#static-init-order
@@ -28,16 +27,14 @@ NodeStyle()
 }
 
 
-NodeStyle::
-NodeStyle(QString jsonText)
+NodeStyle::NodeStyle(QString jsonText)
 {
   loadJsonText(jsonText);
 }
 
 
 void
-NodeStyle::
-setNodeStyle(QString jsonText)
+NodeStyle::setNodeStyle(QString jsonText)
 {
   NodeStyle style(jsonText);
 
@@ -48,10 +45,10 @@ setNodeStyle(QString jsonText)
 
 #ifdef STYLE_DEBUG
   #define NODE_STYLE_CHECK_UNDEFINED_VALUE(v, variable) { \
-      if (v.type() == QJsonValue::Undefined || \
-          v.type() == QJsonValue::Null) \
-        qWarning() << "Undefined value for parameter:" << #variable; \
-  }
+    if (v.type() == QJsonValue::Undefined || \
+      v.type() == QJsonValue::Null) \
+    qWarning() << "Undefined value for parameter:" << #variable; \
+}
 #else
   #define NODE_STYLE_CHECK_UNDEFINED_VALUE(v, variable)
 #endif
@@ -78,13 +75,11 @@ setNodeStyle(QString jsonText)
 }
 
 void
-NodeStyle::
-loadJsonFile(QString styleFile)
+NodeStyle::loadJsonFile(QString styleFile)
 {
   QFile file(styleFile);
 
-  if (!file.open(QIODevice::ReadOnly))
-  {
+  if (!file.open(QIODevice::ReadOnly)) {
     qWarning() << "Couldn't open file " << styleFile;
 
     return;
@@ -95,16 +90,14 @@ loadJsonFile(QString styleFile)
 
 
 void
-NodeStyle::
-loadJsonText(QString jsonText)
+NodeStyle::loadJsonText(QString jsonText)
 {
   loadJsonFromByteArray(jsonText.toUtf8());
 }
 
 
 void
-NodeStyle::
-loadJsonFromByteArray(QByteArray const &byteArray)
+NodeStyle::loadJsonFromByteArray(QByteArray const & byteArray)
 {
   QJsonDocument json(QJsonDocument::fromJson(byteArray));
 

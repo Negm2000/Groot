@@ -11,9 +11,8 @@ using QtNodes::PortType;
 using QtNodes::PortIndex;
 using QtNodes::Connection;
 
-NodeState::
-NodeState(std::unique_ptr<NodeDataModel> const &model)
-  : _inConnections(model->nPorts(PortType::In))
+NodeState::NodeState(std::unique_ptr<NodeDataModel> const & model)
+: _inConnections(model->nPorts(PortType::In))
   , _outConnections(model->nPorts(PortType::Out))
   , _reaction(NOT_REACTING)
   , _reactingPortType(PortType::None)
@@ -22,34 +21,32 @@ NodeState(std::unique_ptr<NodeDataModel> const &model)
 
 
 std::vector<NodeState::ConnectionPtrSet> const &
-NodeState::
-getEntries(PortType portType) const
+NodeState::getEntries(PortType portType) const
 {
-  if (portType == PortType::In)
+  if (portType == PortType::In) {
     return _inConnections;
-  else
+  } else {
     return _outConnections;
+  }
 }
 
 
 std::vector<NodeState::ConnectionPtrSet> &
-NodeState::
-getEntries(PortType portType)
+NodeState::getEntries(PortType portType)
 {
-  if (portType == PortType::In)
+  if (portType == PortType::In) {
     return _inConnections;
-  else
+  } else {
     return _outConnections;
+  }
 }
 
 
 NodeState::ConnectionPtrSet
-NodeState::
-connections(PortType portType, PortIndex portIndex) const
+NodeState::connections(PortType portType, PortIndex portIndex) const
 {
-  auto const &connections = getEntries(portType);
-  if( portIndex < 0 || static_cast<unsigned long>(portIndex) >= connections.size() )
-  {
+  auto const & connections = getEntries(portType);
+  if (portIndex < 0 || static_cast<unsigned long>(portIndex) >= connections.size() ) {
     return NodeState::ConnectionPtrSet();
   }
   return connections[portIndex];
@@ -57,57 +54,56 @@ connections(PortType portType, PortIndex portIndex) const
 
 
 void
-NodeState::
-setConnection(PortType portType,
-              PortIndex portIndex,
-              Connection& connection)
+NodeState::setConnection(
+  PortType portType,
+  PortIndex portIndex,
+  Connection & connection)
 {
-  auto &connections = getEntries(portType);
+  auto & connections = getEntries(portType);
 
-  connections.at(portIndex).insert(std::make_pair(connection.id(),
-                                               &connection));
+  connections.at(portIndex).insert(
+    std::make_pair(
+      connection.id(),
+      &connection));
 }
 
 
 void
-NodeState::
-eraseConnection(PortType portType,
-                PortIndex portIndex,
-                QUuid id)
+NodeState::eraseConnection(
+  PortType portType,
+  PortIndex portIndex,
+  QUuid id)
 {
   getEntries(portType)[portIndex].erase(id);
 }
 
 
 NodeState::ReactToConnectionState
-NodeState::
-reaction() const
+NodeState::reaction() const
 {
   return _reaction;
 }
 
 
 PortType
-NodeState::
-reactingPortType() const
+NodeState::reactingPortType() const
 {
   return _reactingPortType;
 }
 
 
 NodeDataType
-NodeState::
-reactingDataType() const
+NodeState::reactingDataType() const
 {
   return _reactingDataType;
 }
 
 
 void
-NodeState::
-setReaction(ReactToConnectionState reaction,
-            PortType reactingPortType,
-            NodeDataType reactingDataType)
+NodeState::setReaction(
+  ReactToConnectionState reaction,
+  PortType reactingPortType,
+  NodeDataType reactingDataType)
 {
   _reaction = reaction;
 
@@ -118,24 +114,21 @@ setReaction(ReactToConnectionState reaction,
 
 
 bool
-NodeState::
-isReacting() const
+NodeState::isReacting() const
 {
   return _reaction == REACTING;
 }
 
 
 void
-NodeState::
-setResizing(bool resizing)
+NodeState::setResizing(bool resizing)
 {
   _resizing = resizing;
 }
 
 
 bool
-NodeState::
-resizing() const
+NodeState::resizing() const
 {
   return _resizing;
 }

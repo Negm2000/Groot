@@ -10,20 +10,22 @@
 #include <nodes/DataModelRegistry>
 
 
-NodeModels ReadTreeNodesModel(const QDomElement& root);
+NodeModels ReadTreeNodesModel(const QDomElement & root);
 
-void RecursivelyCreateXml(const QtNodes::FlowScene &scene,
-                          QDomDocument& doc,
-                          QDomElement& parent_element,
-                          const QtNodes::Node* node);
+void RecursivelyCreateXml(
+  const QtNodes::FlowScene & scene,
+  QDomDocument & doc,
+  QDomElement & parent_element,
+  const QtNodes::Node * node);
 
-bool VerifyXML(QDomDocument& doc,
-               const std::vector<QString> &registered_ID,
-               std::vector<QString> &error_messages);
+bool VerifyXML(
+  QDomDocument & doc,
+  const std::vector<QString> & registered_ID,
+  std::vector<QString> & error_messages);
 
-NodeModel buildTreeNodeModelFromXML(const QDomElement &node);
+NodeModel buildTreeNodeModelFromXML(const QDomElement & node);
 
-QDomElement writePortModel(const QString &port_name, const PortModel &port, QDomDocument &doc);
+QDomElement writePortModel(const QString & port_name, const PortModel & port, QDomDocument & doc);
 
 
 #endif // XMLPARSERS_HPP

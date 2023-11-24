@@ -24,13 +24,12 @@ enum class NodeValidationState
 class StyleCollection;
 
 class NODE_EDITOR_PUBLIC NodeDataModel
-  : public QObject
-  , public Serializable
+  : public QObject,
+  public Serializable
 {
   Q_OBJECT
 
 public:
-
   NodeDataModel();
 
   virtual
@@ -41,12 +40,10 @@ public:
   name() const = 0;
 
 public:
-
   QJsonObject
   save() const override;
 
 public:
-
   virtual
   unsigned int nPorts(PortType portType) const = 0;
 
@@ -54,7 +51,6 @@ public:
   NodeDataType dataType(PortType portType, PortIndex portIndex) const = 0;
 
 public:
-
   enum class ConnectionPolicy
   {
     One,
@@ -68,19 +64,19 @@ public:
     return ConnectionPolicy::Many;
   }
 
-  NodeStyle const&
+  NodeStyle const &
   nodeStyle() const;
 
   void
-  setNodeStyle(NodeStyle const& style);
+  setNodeStyle(NodeStyle const & style);
 
 public:
-
   /// Triggers the algorithm
   virtual
   void
-  setInData(std::shared_ptr<NodeData> nodeData,
-            PortIndex port) = 0;
+  setInData(
+    std::shared_ptr<NodeData> nodeData,
+    PortIndex port) = 0;
 
   virtual
   std::shared_ptr<NodeData>
@@ -92,21 +88,20 @@ public:
 
   virtual
   bool
-  resizable() const { return false; }
+  resizable() const {return false;}
 
   virtual
   NodeValidationState
-  validationState() const { return NodeValidationState::Valid; }
+  validationState() const {return NodeValidationState::Valid;}
 
   virtual
   QString
-  validationMessage() const { return QString(""); }
+  validationMessage() const {return QString("");}
 
   virtual
-  NodePainterDelegate* painterDelegate() const { return nullptr; }
+  NodePainterDelegate * painterDelegate() const {return nullptr;}
 
 signals:
-
   void
   dataUpdated(PortIndex index);
 
@@ -122,7 +117,6 @@ signals:
   void embeddedWidgetSizeUpdated();
 
 private:
-
   NodeStyle _nodeStyle;
 };
 }

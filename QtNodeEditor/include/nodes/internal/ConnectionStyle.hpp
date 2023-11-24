@@ -11,25 +11,21 @@ namespace QtNodes
 class NODE_EDITOR_PUBLIC ConnectionStyle : public Style
 {
 public:
-
   ConnectionStyle();
 
   ConnectionStyle(QString jsonText);
 
 public:
-
   static void setConnectionStyle(QString jsonText);
 
 private:
-
   void loadJsonText(QString jsonText) override;
 
   void loadJsonFile(QString fileName) override;
 
-  void loadJsonFromByteArray(QByteArray const &byteArray) override;
+  void loadJsonFromByteArray(QByteArray const & byteArray) override;
 
 public:
-
   QColor constructionColor() const;
   QColor normalColor() const;
   QColor normalColor(QString typeId) const;

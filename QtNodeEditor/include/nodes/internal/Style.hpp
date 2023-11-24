@@ -5,12 +5,10 @@
 class Style
 {
 public:
-
   virtual
   ~Style() = default;
 
 private:
-
   virtual void
   loadJsonText(QString jsonText) = 0;
 
@@ -18,5 +16,5 @@ private:
   loadJsonFile(QString fileName) = 0;
 
   virtual void
-  loadJsonFromByteArray(QByteArray const &byteArray) = 0;
+  loadJsonFromByteArray(QByteArray const & byteArray) = 0;
 };

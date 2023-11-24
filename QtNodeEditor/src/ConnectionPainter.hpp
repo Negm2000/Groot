@@ -12,14 +12,14 @@ class Connection;
 class ConnectionPainter
 {
 public:
-
   static
   void
-  paint(QPainter* painter,
-        Connection const& connection);
+  paint(
+    QPainter * painter,
+    Connection const & connection);
 
   static
   QPainterPath
-  getPainterStroke(ConnectionGeometry const& geom);
+  getPainterStroke(ConnectionGeometry const & geom);
 };
 }

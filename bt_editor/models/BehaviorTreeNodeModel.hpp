@@ -24,113 +24,109 @@ using QtNodes::NodeDataModel;
 
 class BehaviorTreeDataModel : public NodeDataModel
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    BehaviorTreeDataModel(const NodeModel &model );
+  BehaviorTreeDataModel(const NodeModel & model);
 
-    ~BehaviorTreeDataModel() override;
-
-public:
-
-    NodeType nodeType() const;
-
-    virtual void setInstanceName(const QString& name);
+  ~BehaviorTreeDataModel() override;
 
 public:
+  NodeType nodeType() const;
 
-    void initWidget();
+  virtual void setInstanceName(const QString & name);
 
-    virtual unsigned int nPorts(PortType portType) const override;
+public:
+  void initWidget();
 
-    ConnectionPolicy portOutConnectionPolicy(PortIndex) const final;
+  virtual unsigned int nPorts(PortType portType) const override;
 
-    NodeDataType dataType(PortType , PortIndex ) const final;
+  ConnectionPolicy portOutConnectionPolicy(PortIndex) const final;
 
-    std::shared_ptr<NodeData> outData(PortIndex port) final;
+  NodeDataType dataType(PortType, PortIndex) const final;
 
-    void setInData(std::shared_ptr<NodeData>, int) final {}
+  std::shared_ptr<NodeData> outData(PortIndex port) final;
 
-    const QString &registrationName() const;
+  void setInData(std::shared_ptr<NodeData>, int) final {}
 
-    const NodeModel &model() const { return _model; }
+  const QString & registrationName() const;
 
-    QString name() const final { return registrationName(); }
+  const NodeModel & model() const {return _model;}
 
-    const QString& instanceName() const;
+  QString name() const final {return registrationName();}
 
-    PortsMapping getCurrentPortMapping() const;
+  const QString & instanceName() const;
 
-    QWidget *embeddedWidget() final { return _main_widget; }
+  PortsMapping getCurrentPortMapping() const;
 
-    QWidget *parametersWidget() { return _params_widget; }
+  QWidget * embeddedWidget() final {return _main_widget;}
 
-    QJsonObject save() const override;
+  QWidget * parametersWidget() {return _params_widget;}
 
-    void restore(QJsonObject const &) override;
+  QJsonObject save() const override;
 
-    void lock(bool locked);
+  void restore(QJsonObject const &) override;
 
-    void setPortMapping(const QString& port_name, const QString& value);
+  void lock(bool locked);
 
-    int UID() const { return _uid; }
+  void setPortMapping(const QString & port_name, const QString & value);
 
-    bool eventFilter(QObject *obj, QEvent *event) override;
+  int UID() const {return _uid;}
 
+  bool eventFilter(QObject * obj, QEvent * event) override;
 
 public slots:
+  void updateNodeSize();
 
-    void updateNodeSize();
-
-    void onHighlightPortValue(QString value);
+  void onHighlightPortValue(QString value);
 
 protected:
+  QFrame * _main_widget;
+  QFrame * _params_widget;
 
-    QFrame*  _main_widget;
-    QFrame*  _params_widget;
+  QLineEdit * _line_edit_name;
 
-    QLineEdit* _line_edit_name;
+  std::map<QString, QWidget *> _ports_widgets;
+  int16_t _uid;
 
-    std::map<QString, QWidget*> _ports_widgets;
-    int16_t _uid;
-
-    QFormLayout* _form_layout;
-    QVBoxLayout* _main_layout;
-    QLabel* _caption_label;
-    QFrame* _caption_logo_left;
-    QFrame* _caption_logo_right;
+  QFormLayout * _form_layout;
+  QVBoxLayout * _main_layout;
+  QLabel * _caption_label;
+  QFrame * _caption_logo_left;
+  QFrame * _caption_logo_right;
 
 private:
-    const NodeModel _model;
-    QString _instance_name;
-    QSvgRenderer* _icon_renderer;
+  const NodeModel _model;
+  QString _instance_name;
+  QSvgRenderer * _icon_renderer;
 
-    void readStyle();
-    QString _style_icon;
-    QColor  _style_caption_color;
-    QString  _style_caption_alias;
+  void readStyle();
+  QString _style_icon;
+  QColor _style_caption_color;
+  QString _style_caption_alias;
 
 signals:
+  void parameterUpdated(QString, QWidget *);
 
-    void parameterUpdated(QString, QWidget*);
+  void instanceNameChanged();
 
-    void instanceNameChanged();
-
-    void portValueDoubleChicked(QLineEdit* value_port);
+  void portValueDoubleChicked(QLineEdit * value_port);
 
 };
 
 
-class GrootLineEdit: public QLineEdit
+class GrootLineEdit : public QLineEdit
 {
-    Q_OBJECT
+  Q_OBJECT
+
 public:
-    GrootLineEdit(QWidget* parent = nullptr): QLineEdit(parent) {}
+  GrootLineEdit(QWidget * parent = nullptr)
+  : QLineEdit(parent) {}
 
-    void mouseDoubleClickEvent(QMouseEvent *ev) override;
-    void focusOutEvent(QFocusEvent* ev) override;
+  void mouseDoubleClickEvent(QMouseEvent * ev) override;
+  void focusOutEvent(QFocusEvent * ev) override;
+
 signals:
-    void doubleClicked();
-    void lostFocus();
+  void doubleClicked();
+  void lostFocus();
 };
-

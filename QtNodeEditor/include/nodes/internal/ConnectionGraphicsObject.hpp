@@ -21,20 +21,19 @@ class ConnectionGraphicsObject
   Q_OBJECT
 
 public:
-
-  ConnectionGraphicsObject(FlowScene &scene,
-                           Connection &connection);
+  ConnectionGraphicsObject(
+    FlowScene & scene,
+    Connection & connection);
 
   virtual
   ~ConnectionGraphicsObject();
 
   enum { Type = UserType + 2 };
   int
-  type() const override { return Type; }
+  type() const override {return Type;}
 
 public:
-
-  Connection&
+  Connection &
   connection();
 
   QRectF
@@ -54,39 +53,37 @@ public:
   lock(bool locked);
 
 protected:
+  void
+  paint(
+    QPainter * painter,
+    QStyleOptionGraphicsItem const * option,
+    QWidget * widget = 0) override;
 
   void
-  paint(QPainter* painter,
-        QStyleOptionGraphicsItem const* option,
-        QWidget* widget = 0) override;
+  mousePressEvent(QGraphicsSceneMouseEvent * event) override;
 
   void
-  mousePressEvent(QGraphicsSceneMouseEvent* event) override;
+  mouseMoveEvent(QGraphicsSceneMouseEvent * event) override;
 
   void
-  mouseMoveEvent(QGraphicsSceneMouseEvent* event) override;
+  mouseReleaseEvent(QGraphicsSceneMouseEvent * event) override;
 
   void
-  mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
+  hoverEnterEvent(QGraphicsSceneHoverEvent * event) override;
 
   void
-  hoverEnterEvent(QGraphicsSceneHoverEvent* event) override;
+  hoverLeaveEvent(QGraphicsSceneHoverEvent * event) override;
 
   void
-  hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override;
-
-  void
-  contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override;
+  contextMenuEvent(QGraphicsSceneContextMenuEvent * event) override;
 
 private:
-
   void
   addGraphicsEffect();
 
 private:
-
   FlowScene & _scene;
 
-  Connection& _connection;
+  Connection & _connection;
 };
 }

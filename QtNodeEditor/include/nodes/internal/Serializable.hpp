@@ -8,7 +8,6 @@ namespace QtNodes
 class Serializable
 {
 public:
-
   virtual
   ~Serializable() = default;
 

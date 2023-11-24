@@ -10,21 +10,19 @@ namespace QtNodes
 class StyleCollection
 {
 public:
-
   static
-  NodeStyle const&
+  NodeStyle const &
   nodeStyle();
 
   static
-  ConnectionStyle const&
+  ConnectionStyle const &
   connectionStyle();
 
   static
-  FlowViewStyle const&
+  FlowViewStyle const &
   flowViewStyle();
 
 public:
-
   static
   void
   setNodeStyle(NodeStyle);
@@ -38,20 +36,18 @@ public:
   setFlowViewStyle(FlowViewStyle);
 
 private:
-
   StyleCollection() = default;
 
-  StyleCollection(StyleCollection const&) = delete;
+  StyleCollection(StyleCollection const &) = delete;
 
-  StyleCollection&
-  operator=(StyleCollection const&) = delete;
+  StyleCollection &
+  operator=(StyleCollection const &) = delete;
 
   static
-  StyleCollection&
+  StyleCollection &
   instance();
 
 private:
-
   NodeStyle _nodeStyle;
 
   ConnectionStyle _connectionStyle;

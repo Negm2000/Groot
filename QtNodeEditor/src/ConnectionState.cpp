@@ -18,34 +18,29 @@ ConnectionState::
 
 
 void
-ConnectionState::
-interactWithNode(Node* node)
+ConnectionState::interactWithNode(Node * node)
 {
-  if (node)
-  {
+  if (node) {
     _lastHoveredNode = node;
-  }
-  else
-  {
+  } else {
     resetLastHoveredNode();
   }
 }
 
 
 void
-ConnectionState::
-setLastHoveredNode(Node* node)
+ConnectionState::setLastHoveredNode(Node * node)
 {
   _lastHoveredNode = node;
 }
 
 
 void
-ConnectionState::
-resetLastHoveredNode()
+ConnectionState::resetLastHoveredNode()
 {
-  if (_lastHoveredNode)
+  if (_lastHoveredNode) {
     _lastHoveredNode->resetReactionToConnection();
+  }
 
   _lastHoveredNode = nullptr;
 }
